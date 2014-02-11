@@ -1,0 +1,332 @@
+2/9/2014    Sunday
+
+*   R is case sensitive!
+*   TAB auto completes a variable name
+*   type a function name, left parenthesis, then TAB to display function parameter hint
+*   CTRL-L clears the console
+*   CTRL-1 puts the cursor back to the text editor
+
+*   install packages in the package pane, if R is restarted, all the loaded packages are unloaded
+library(ggplot2)
+require(coefplot)   # These two are the same
+
+> a <- b <- 7
+> a
+[1] 7
+> b
+[1] 7
+
+> assign("j",c(1,2))
+> j
+[1] 1 2
+
+rm(j)       # removes the variable j
+remove(j)   # does the same thing
+
+class(j)    # checking the type of a variable
+> x <- 2
+> x
+[1] 2
+> class(x)
+[1] "numeric"
+> is.numeric(x)
+[1] TRUE
+> i <- 5L
+> class(i)
+[1] "integer"
+> is.numeric(i)
+[1] TRUE
+> is.integer(i)
+[1] TRUE
+> class(5L/2L)
+[1] "numeric"
+
+> x <- "data"
+> class(x)
+[1] "character"
+> y <- factor('data')
+> y
+[1] data
+Levels: data
+> nchar("hello")
+[1] 5
+> nchar(3)
+[1] 1
+> nchar(1000)
+[1] 4
+> nchar(y)
+Error in nchar(y) : 'nchar()' requires a character vector
+
+> date1 <- as.Date("2012-06-28")
+> date1
+[1] "2012-06-28"
+> class(date1)
+[1] "Date"
+> as.numeric(date1)
+[1] 15519       # number of dates since 1/1/1970
+> date2 <- as.POSIXct("2012-06-28 17:42")
+> date2
+[1] "2012-06-28 17:42:00 EDT"
+> class(date2)
+[1] "POSIXct" "POSIXt" 
+> as.numeric(date2)
+[1] 1340919720  # number of seconds since 1/1/1970 12:0:0 AM
+
+> TRUE=1
+> FALSE=0
+> TRUE * 10
+[1] 10
+> FALSE * 5
+[1] 0
+
+> k <- TRUE
+> class(k)
+[1] "logical"
+> is.logical(k)
+[1] TRUE
+> T
+[1] TRUE
+> class(T)
+[1] "logical"
+> class(T)
+[1] "logical"
+> T
+[1] TRUE
+> class(T)
+[1] "logical"
+> T <- 7
+> class(T)
+[1] "numeric"
+> TRUE <- 8
+Error in TRUE <- 8 : invalid (do_set) left-hand side to assignment
+
+> x <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+> x * 3
+ [1]  3  6  9 12 15 18 21 24 27 30
+> x + 2
+ [1]  3  4  5  6  7  8  9 10 11 12
+ 
+> x <- 1:10
+> y <- -5:4
+> x + y
+ [1] -4 -2  0  2  4  6  8 10 12 14
+> x * y
+ [1] -5 -8 -9 -8 -5  0  7 16 27 40
+
+> length(x+y)
+[1] 10
+
+> x + c(1, 2)
+ [1]  2  4  4  6  6  8  8 10 10 12  # recycles the shorter vector
+> x + c(1, 2, 3)
+ [1]  2  4  6  5  7  9  8 10 12 11
+Warning message:
+In x + c(1, 2, 3) :
+  longer object length is not a multiple of shorter object length
+
+> x <- 10:1
+> x
+ [1] 10  9  8  7  6  5  4  3  2  1
+> y <- -4:5
+> y
+ [1] -4 -3 -2 -1  0  1  2  3  4  5
+> x < y
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
+> any(x < y)
+[1] TRUE
+> all(x < y)
+[1] FALSE
+
+> q <- c('Hockey', 'Football', 'Baseball', 'Curling', 'Rugby',
+         'Lacrosse','Basketball','Tennis','Cricket','Soccer')   # OK when in 2 lines
+> q
+ [1] "Hockey"     "Football"   "Baseball"   "Curling"   
+ [5] "Rugby"      "Lacrosse"   "Basketball" "Tennis"    
+ [9] "Cricket"    "Soccer"    
+> nchar(q)
+ [1]  6  8  8  7  5  8 10  6  7  6
+ 
+> x
+ [1] 10  9  8  7  6  5  4  3  2  1
+> x[1:2]
+[1] 10  9
+> x[c(1,4)]
+[1] 10  7
+
+> k <- c(One='a', Two='y', Last='r')
+> k
+ One  Two Last 
+ "a"  "y"  "r" 
+> k['One']
+One 
+"a" 
+> w <- 1:3
+> w
+[1] 1 2 3
+> names(w) <- c('a', 'b', 'c')
+> w
+a b c 
+1 2 3 
+
+2/10/2014   Monday
+--------------------
+> x <- 10:1
+> y <- -4:5
+> q <- c('Hockey', 'Football', 'Baseball', 'Curling', 'Rugby', 'Lacrosse', 'Basketball', 'Tennis','Cricket','Soccer')
+> theDF <- data.frame(First=x, Second=y, Sport=q, stringsAsFactors=FALSE)
+> theDF
+   First Second      Sport
+1     10     -4     Hockey
+2      9     -3   Football
+3      8     -2   Baseball
+4      7     -1    Curling
+5      6      0      Rugby
+6      5      1   Lacrosse
+7      4      2 Basketball
+8      3      3     Tennis
+9      2      4    Cricket
+10     1      5     Soccer
+> class(theDF$Sport)
+[1] "character"
+
+> nrow(theDF)
+[1] 10
+> ncol(theDF)
+[1] 3
+> dim(theDF)
+[1] 10  3
+> x
+ [1] 10  9  8  7  6  5  4  3  2  1
+> nrow(x)
+NULL
+> length(x)
+[1] 10
+> NROW(x)
+[1] 10
+> names(theDF)
+[1] "First"  "Second" "Sport" 
+> names(theDF)[3]
+[1] "Sport"
+> rownames(theDF)
+ [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10"
+> rownames(theDF) <- c('One', 'Two', 'Three', 'Four', 'Five',
++                      'Six', 'Seven', 'Eight', 'Nine', 'Ten')
+> theDF
+      First Second      Sport
+One      10     -4     Hockey
+Two       9     -3   Football
+Three     8     -2   Baseball
+Four      7     -1    Curling
+Five      6      0      Rugby
+Six       5      1   Lacrosse
+Seven     4      2 Basketball
+Eight     3      3     Tennis
+Nine      2      4    Cricket
+Ten       1      5     Soccer
+> rownames(theDF) <- NULL
+> theDF
+   First Second      Sport
+1     10     -4     Hockey
+2      9     -3   Football
+3      8     -2   Baseball
+4      7     -1    Curling
+5      6      0      Rugby
+6      5      1   Lacrosse
+7      4      2 Basketball
+8      3      3     Tennis
+9      2      4    Cricket
+10     1      5     Soccer
+
+> theDF[3, 2]
+[1] -2
+> class(theDF[3, 2])
+[1] "integer"
+> theDF[3, 2:3]
+  Second    Sport
+3     -2 Baseball
+> class(theDF[3, 2:3])
+[1] "data.frame"
+> theDF[3:5, 2]
+[1] -2 -1  0
+> class(theDF[3:5, 2])
+[1] "integer"
+> theDF[c(3,5), 2:3]
+  Second    Sport
+3     -2 Baseball
+5      0    Rugby
+> class(theDF[c(3,5), 2:3])
+[1] "data.frame"
+> theDF[3, c(1,3)]
+  First    Sport
+3     8 Baseball
+> class(theDF[3, c(1,3)])
+[1] "data.frame"            # data.frame if more than one column
+> theDF[, 3, drop=FALSE]    # drop=FALSE returns a data.frame
+        Sport
+1      Hockey
+2    Football
+3    Baseball
+4     Curling
+5       Rugby
+6    Lacrosse
+7  Basketball
+8      Tennis
+9     Cricket
+10     Soccer
+
+> theDF[, c('Sport', 'First', 'Sport')]
+        Sport First    Sport.1
+1      Hockey    10     Hockey
+2    Football     9   Football
+3    Baseball     8   Baseball
+4     Curling     7    Curling
+5       Rugby     6      Rugby
+6    Lacrosse     5   Lacrosse
+7  Basketball     4 Basketball
+8      Tennis     3     Tennis
+9     Cricket     2    Cricket
+10     Soccer     1     Soccer
+
+> theDF[c('First', 'Sport')]    # All rows are selected
+   First      Sport
+1     10     Hockey
+2      9   Football
+3      8   Baseball
+4      7    Curling
+5      6      Rugby
+6      5   Lacrosse
+7      4 Basketball
+8      3     Tennis
+9      2    Cricket
+10     1     Soccer
+
+> theDF['Sport']
+        Sport
+1      Hockey
+2    Football
+3    Baseball
+4     Curling
+5       Rugby
+6    Lacrosse
+7  Basketball
+8      Tennis
+9     Cricket
+10     Soccer
+> theDF[['Sport']]
+ [1] "Hockey"     "Football"   "Baseball"   "Curling"   
+ [5] "Rugby"      "Lacrosse"   "Basketball" "Tennis"    
+ [9] "Cricket"    "Soccer"    
+> theDF[2]
+   Second
+1      -4
+2      -3
+3      -2
+4      -1
+5       0
+6       1
+7       2
+8       3
+9       4
+10      5
+> theDF[[2]]
+ [1] -4 -3 -2 -1  0  1  2  3  4  5
